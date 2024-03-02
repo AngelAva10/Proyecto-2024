@@ -22,11 +22,11 @@ export const subirAvatar = async (ruta) => {
   }
 };
 
-export const subirIconoProyecto = async (ruta) => {
+export const subirIconoHabitacion = async (ruta) => {
   try {
     const upload = await cloudinary.v2.uploader.upload(ruta, {
       public_id: `${uuidv4()}`,
-      folder: "IconoDeProyectoFinal",
+      folder: "IconoDeHabitacionFinal",
     });
     return upload.secure_url;
   } catch (error) {

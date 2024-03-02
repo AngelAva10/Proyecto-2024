@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const proyectosSchema = mongoose.Schema(
+const habitacionsSchema = mongoose.Schema(
   {
     icono:{
       type: String,
@@ -43,6 +43,6 @@ const proyectosSchema = mongoose.Schema(
   }
 );
 
-const Proyecto = mongoose.model("Proyecto", proyectosSchema);
+const Habitacion = mongoose.model("Habitacion", habitacionsSchema);
 
-export default Proyecto;
+export default Habitacion;

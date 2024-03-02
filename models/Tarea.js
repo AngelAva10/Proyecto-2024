@@ -25,9 +25,9 @@ const tareasSchema = mongoose.Schema(
       required: true,
       enum: ["Baja", "Media", "Alta"],
     },
-    proyecto: {
+    habitacion: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Proyecto",
+      ref: "Habitacion",
     },
   },
   {

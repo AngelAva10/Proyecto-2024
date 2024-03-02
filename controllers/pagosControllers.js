@@ -22,8 +22,8 @@ const checkout = async (req, res) => {
     }
   try {
     const session = await stripe.checkout.sessions.create({
-      success_url: "http://localhost:5173/proyectos/pago-exitoso",
-      cancel_url: "http://localhost:5173/proyectos/pago-fallido",
+      success_url: "http://localhost:5173/habitacions/pago-exitoso",
+      cancel_url: "http://localhost:5173/habitacions/pago-fallido",
       line_items: [{ price: "price_1N4SmbI3JMaqaSPWLSod3myk", quantity: 1 }],
       mode: "subscription",
       payment_method_types: ["card"],

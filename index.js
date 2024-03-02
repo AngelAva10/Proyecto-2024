@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import conectarDB from "./config/db.js";
 import usuarioRoutes from "./routes/usuarioRoutes.js";
-import proyectoRoutes from "./routes/proyectoRoutes.js";
+import habitacionRoutes from "./routes/habitacionRoutes.js";
 import tareaRoutes from "./routes/tareaRoutes.js";
 import pagosRoutes from "./routes/pagosRoutes.js"
 
@@ -34,7 +34,7 @@ app.use(cors());
 
 //Routing
 app.use("/api/usuarios", usuarioRoutes);
-app.use("/api/proyectos", proyectoRoutes);
+app.use("/api/habitacions", habitacionRoutes);
 app.use("/api/tareas", tareaRoutes);
 app.use("/api/pagos", pagosRoutes);
 

@@ -1,32 +1,32 @@
-import Proyecto from "../models/Proyecto.js";
+import Habitacion from "../models/Habitacion.js";
 import Tarea from "../models/Tarea.js";
 import Usuario from "../models/Usuario.js";
 
 const agregarTarea = async (req, res) => {
   const userId = req.usuario._id
-  const { proyecto } = req.body;
+  const { habitacion } = req.body;
   
-  const existeProyecto = await Proyecto.findById(proyecto);
+  const existeHabitacion = await Habitacion.findById(habitacion);
   const usuario = await Usuario.findById({_id:userId})
-  const tareas = await Tarea.find({proyecto})
+  const tareas = await Tarea.find({habitacion})
   if(usuario.premium === false && tareas.length === 5){
-    return res.json({msg: "Alcanzo el limite maximo de tareas en este proyecto"})
+    return res.json({msg: "Alcanzo el limite maximo de tareas en este habitacion"})
   }
 
-  if (!existeProyecto) {
-    const error = new Error("Proyecto no existe");
+  if (!existeHabitacion) {
+    const error = new Error("Habitacion no existe");
     return res.status(404).json({ msg: error.message });
   }
 
-  if (existeProyecto.creador.toString() !== req.usuario._id.toString()) {
+  if (existeHabitacion.creador.toString() !== req.usuario._id.toString()) {
     const error = new Error("No tienes los permisos para añadir tareas");
     return res.status(403).json({ msg: error.message });
   }
   try {
     const tareaAlmacenada = await Tarea.create(req.body);
-    //Almacenar el ID en el proyecto
-    existeProyecto.tareas.push(tareaAlmacenada._id);
-    await existeProyecto.save();
+    //Almacenar el ID en el habitacion
+    existeHabitacion.tareas.push(tareaAlmacenada._id);
+    await existeHabitacion.save();
     res.json(tareaAlmacenada);
   } catch (error) {
     console.log(error);
@@ -35,14 +35,14 @@ const agregarTarea = async (req, res) => {
 
 const obtenerTarea = async (req, res) => {
   const { id } = req.params;
-  const tarea = await Tarea.findById(id).populate("proyecto");
+  const tarea = await Tarea.findById(id).populate("habitacion");
 
   if (!tarea) {
     const error = new Error("Tarea no encontrada");
     return res.status(404).json({ msg: error.message });
   }
 
-  if (tarea.proyecto.creador.toString() !== req.usuario._id.toString()) {
+  if (tarea.habitacion.creador.toString() !== req.usuario._id.toString()) {
     const error = new Error("Accion no valida");
     return res.status(403).json({ msg: error.message });
   }
@@ -51,14 +51,14 @@ const obtenerTarea = async (req, res) => {
 
 const actualizarTarea = async (req, res) => {
   const { id } = req.params;
-  const tarea = await Tarea.findById({_id:id}).populate("proyecto");
+  const tarea = await Tarea.findById({_id:id}).populate("habitacion");
 
   if (!tarea) {
     const error = new Error("Tarea no encontrada");
     return res.status(404).json({ msg: error.message });
   }
 
-  if (tarea.proyecto.creador.toString() !== req.usuario._id.toString()) {
+  if (tarea.habitacion.creador.toString() !== req.usuario._id.toString()) {
     const error = new Error("Accion no valida");
     return res.status(403).json({ msg: error.message });
   }
@@ -78,13 +78,13 @@ const actualizarTarea = async (req, res) => {
 
 const eliminarTarea = async (req, res) => {
   const { id } = req.params;
-  const tarea = await Tarea.findById({_id:id}).populate("proyecto")
+  const tarea = await Tarea.findById({_id:id}).populate("habitacion")
   if (!tarea) {
     const error = new Error("Tarea no encontrada");
     return res.status(404).json({ msg: error.message });
   }
 
-  if (tarea.proyecto.creador.toString() !== req.usuario._id.toString()) {
+  if (tarea.habitacion.creador.toString() !== req.usuario._id.toString()) {
     const error = new Error("Accion no valida");
     return res.status(403).json({ msg: error.message });
   }
