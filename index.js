@@ -34,7 +34,7 @@ app.use(cors());
 
 //Routing
 app.use("/api/usuarios", usuarioRoutes);
-app.use("/api/habitacions", habitacionRoutes);
+app.use("/api/habitaciones", habitacionRoutes);
 app.use("/api/tareas", tareaRoutes);
 app.use("/api/pagos", pagosRoutes);
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const habitacionsSchema = mongoose.Schema(
+const habitacionesSchema = mongoose.Schema(
   {
     icono:{
       type: String,
@@ -43,6 +43,6 @@ const habitacionsSchema = mongoose.Schema(
   }
 );
 
-const Habitacion = mongoose.model("Habitacion", habitacionsSchema);
+const Habitacion = mongoose.model("Habitacion", habitacionesSchema);
 
 export default Habitacion;

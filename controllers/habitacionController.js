@@ -3,20 +3,20 @@ import Habitacion from "../models/Habitacion.js";
 import Tarea from "../models/Tarea.js"
 import Usuario from "../models/Usuario.js";
 
-const obtenerHabitacions = async (req, res) => {
-  const habitacions = await Habitacion.find()
+const obtenerHabitaciones = async (req, res) => {
+  const habitaciones = await Habitacion.find()
     .where("creador")
     .equals(req.usuario)
     .select("-tareas");
-  res.json(habitacions);
+  res.json(habitaciones);
 };
 
 const nuevoHabitacion = async (req, res) => {
   const userId = req.usuario._id;
   const usuario = await Usuario.findById({_id:userId})
-  const habitacions = await Habitacion.find({creador: userId})
-  if(usuario.premium === false && habitacions.length === 5){
-    return res.json({msg: "No puedes crear mas de 5 habitacions"});
+  const habitaciones = await Habitacion.find({creador: userId})
+  if(usuario.premium === false && habitaciones.length === 5){
+    return res.json({msg: "No puedes crear mas de 5 habitaciones"});
   }
 
   const {nombre,descripcion,fechaEntrega,cliente} = req.body;
@@ -114,7 +114,7 @@ const eliminarHabitacion = async (req, res) => {
 };
 
 export {
-  obtenerHabitacions,
+  obtenerHabitaciones,
   obtenerHabitacion,
   nuevoHabitacion,
   editarHabitacion,

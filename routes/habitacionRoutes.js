@@ -4,7 +4,7 @@ import multipart from 'connect-multiparty';
 const router = express.Router();
 const multipartMiddleware = multipart();
 import {
-  obtenerHabitacions,
+  obtenerHabitaciones,
   obtenerHabitacion,
   nuevoHabitacion,
   editarHabitacion,
@@ -14,7 +14,7 @@ import checkAuth from "../middleware/checkAuth.js";
 
 router
   .route("/")
-  .get(checkAuth, obtenerHabitacions)
+  .get(checkAuth, obtenerHabitaciones)
   .post( multipartMiddleware,checkAuth, nuevoHabitacion);
 router
   .route("/:id")
